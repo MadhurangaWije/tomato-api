@@ -31,6 +31,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+@app.get("/health")
+async def root():
+    return "OK"
+
+
 @app.post("/predict")
 async def predict(file: bytes = File(...)):
     with open('temp_tomato_leaf.jpg','wb') as imagef:
